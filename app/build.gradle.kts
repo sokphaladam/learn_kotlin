@@ -38,6 +38,8 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation("com.google.android.material:material:1.2.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.0")
+    implementation("androidx.cardview:cardview:1.0.0")
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
