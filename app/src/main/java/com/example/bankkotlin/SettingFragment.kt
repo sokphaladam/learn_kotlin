@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.children
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +30,19 @@ class SettingFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    fun onShowDialog(view: View, text: String, des: String) {
+        val art = AlertDialog.Builder(view.context)
+        art.setMessage(des)
+        art.setTitle(text)
+        art.setCancelable(false)
+        art.setPositiveButton("OK"){dialog,_ ->
+            dialog.dismiss()
+        }
+
+        val alert = art.create()
+        alert.show()
     }
 
     override fun onCreateView(
@@ -55,5 +71,29 @@ class SettingFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val newArr = arrayOf(
+            R.id.setting_invite,
+            R.id.setting_contact,
+            R.id.setting_help,
+            R.id.setting_term,
+            R.id.setting_lng,
+            R.id.setting_qr,
+            R.id.setting_password,
+            R.id.setting_change,
+            R.id.setting_delete,
+            R.id.setting_logout
+        )
+
+        for (arr in newArr){
+            val item = view.findViewById<LinearLayout>(arr);
+            item.setOnClickListener{
+                onShowDialog(view, "Setting", item.contentDescription.toString())
+            }
+        }
     }
 }
